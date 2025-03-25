@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>LearnMate - Your Learning Companion</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+<body>
+
+<header>
+    <button class="menu-btn" onclick="openMenu()">☰ Menu</button>
+    <h1>LearnMate</h1>
+    <p class="motto">"Empowering minds, one lesson at a time." ✨</p>
+</header>
+
+<div id="sideMenu" class="side-menu">
+    <span class="close-btn" onclick="closeMenu()">&times;</span>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="#lessons">Lessons</a>
+</div>
+
+<div class="search-container">
+    <input type="text" id="searchBar" class="search-bar" placeholder="Search for a lesson..." onkeyup="searchLessons()">
+    <button class="search-button" onclick="searchLessons()">🔍 Search</button>
+</div>
+
+<div class="container">
+    <div class="pdf-list">
+        <h3>📚 Select a PDF Lesson:</h3>
+        <ul>
+            <li onclick="viewPdf('1-IT Era Introduction.pdf')">📄 Lesson 1 - Era Introduction</li>
+            <li onclick="viewPdf('2-IT Era Evolution.pdf')">🎨 Lesson 2 - Era Evolution</li>
+            <li onclick="viewPdf('3-IT Era Role.pdf')">💻 Lesson 3 - Era Role</li>
+            <li onclick="viewPdf('4-IT Era Risks.pdf')">🎐 Lesson 4 - Era Risks</li>
+            <li onclick="viewPdf('5-IT Era Use.pdf')">🧨 Lesson 5 - Era Use</li>
+            <li onclick="viewPdf('6-IT Era Future.pdf')">👓 Lesson 6 - Era Future</li>
+            <li onclick="viewPdf('Fundamentals of Programming.pdf')">🧵 Lesson 7 - Fundamentals of Programming</li>
+            <li onclick="viewPdf('Introduction to Programming L___.pdf')">🧵 Lesson 8 - Introduction to Programming</li>
+            <li onclick="viewPdf('Introduction to Java Programming.pdf')">💻 Lesson 9 - Introduction to Java Programming</li>
+        </ul>
+    </div>
+    <div class="pdf-viewer">
+        <p>📖 Select a lesson to view its content.</p>
+        <iframe id="pdfViewer" src="" frameborder="0"></iframe>
+    </div>
+</div>
+
+<footer>
+    <p>📘 LearnMate - Your Learning Companion. Created with ❤️</p>
+</footer>
+
+<script>
+    function openMenu() {
+        document.getElementById("sideMenu").style.width = "250px";
+    }
+    function closeMenu() {
+        document.getElementById("sideMenu").style.width = "0";
+    }
+    function searchLessons() {
+        const input = document.getElementById('searchBar').value.toLowerCase();
+        const lessons = document.querySelectorAll('.pdf-list li');
+        const pdfList = document.querySelector('.pdf-list ul');
+
+        let found = false;
+
+        lessons.forEach(lesson => {
+            if (lesson.innerText.toLowerCase().includes(input)) {
+                lesson.style.display = 'block';
+                found = true;
+            } else {
+                lesson.style.display = 'none';
+            }
+        });
+
+        // Hide the entire list if no search input or no matches
+        pdfList.style.display = (input === '' || !found) ? 'none' : 'block';
+    }
+    function viewPdf(pdfUrl) {
+        document.getElementById('pdfViewer').src = pdfUrl;
+    }
+</script>
+
+</body>
+</html>
